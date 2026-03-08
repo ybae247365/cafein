@@ -8,7 +8,7 @@ env_path = r"C:\workspace\intel_2026\cafein\.env"
 load_dotenv(dotenv_path=env_path)
 
 url = os.environ.get("SUPABASE_URL")
-key = os.environ.get("SUPABASE_ANON_KEY")
+key = os.environ.get("SUPABASE_KEY")
 
 # 데이터가 잘 들어왔는지 터미널에 찍어봅니다. (서버 켜질 때 확인용)
 if not url or not key:

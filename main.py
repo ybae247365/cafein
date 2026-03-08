@@ -2,7 +2,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 # 폴더 구조에 맞춰서 정확히 import
-from cafein_api.routers import manual 
+from cafein_api.routers import manual
 
 app = FastAPI()
 
@@ -15,6 +15,7 @@ app.add_middleware(
 
 # manual 라우터만 등록
 app.include_router(manual.router)
+
 
 @app.get("/")
 def root():
