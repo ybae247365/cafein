@@ -13,7 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# manual 라우터만 등록
+# prefix를 따로 주지 않음 (이미 라우터 안에 포함됨)
 app.include_router(manual.router)
 
 

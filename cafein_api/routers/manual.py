@@ -7,14 +7,22 @@ from cafein_api.models.manual import ManualItem
 
 router = APIRouter(prefix="/api/manual", tags=["Manual"])
 
-@router.get("/list", response_model=List[ManualItem])
+# 메뉴 리스트 조회
+@router.get("/list") 
 async def get_all_manuals():
     result = supabase.table("menu").select("*").execute()
     return result.data
 
-@router.get("/{manual_id}", response_model=ManualItem)
-async def get_manual_detail(manual_id: str):
-    result = supabase.table("menu").select("*").eq("id", manual_id).single().execute()
-    if not result.data:
-        raise HTTPException(status_code=404, detail="매뉴얼을 찾을 수 없습니다.")
+# FAQ(긴급 상황) 리스트 조회 (새로 추가)
+@router.get("/faq") # 최종 주소: /api/manual/faq
+async def get_faq_list():
+    result = supabase.table("faqs").select("*").order("is_important", desc=True).execute()
     return result.data
+
+@router.get("/{manual_id}")  # 상세 조회용 엔드포인트
+async def get_manual_detail(manual_id: int):
+    # Supabase에서 id가 같은 녀석을 딱 하나(single) 가져옴
+    result = supabase.table("menu").select("*").eq("id", manual_id).single().execute()
+    return result.data
+
+    
